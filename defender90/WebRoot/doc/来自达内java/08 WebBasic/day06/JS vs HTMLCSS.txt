@@ -1,0 +1,13 @@
+﻿<p>XXXXXXX</p>
+var o = document.getElementById("p1");
+<p style="color:red">XXXXX</p>
+o.style.color = “red”;
+<p style="color:red;font-size:20px">XXXXX</p>
+o.style.fontSize="20px";
+css中:.class1{color:red;font-size:20px}
+html中：<p class="class1"></p>
+//或者
+o.className = “class1”;
+o.className="";
+/*js对属性的设置，相当于代替手工编写HTML网页*/
+/*所有HTML,CSS中的属性，JS中都有对应*/

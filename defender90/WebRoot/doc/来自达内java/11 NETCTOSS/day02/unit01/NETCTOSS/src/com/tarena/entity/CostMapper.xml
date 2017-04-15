@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.tarena.dao.CostMapper">
+
+	<!-- findAll -->
+	<select id="findAll"
+		resultType="com.tarena.entity.Cost">
+		select * from cost
+		order by cost_id
+	</select>
+	
+	<!-- save -->
+	<!-- 
+		#{}中的字符串是实体对象中的属性名，
+		不是表中的字段名。
+	 -->
+	 <!-- 
+	 	insert into cost value(?,?,?);
+	 	ps.setInt(cost.getBase_duration());
+	 	当传入参数为null时，MyBatis无法判断其
+	 	类型，那么在处理参数值时就会有错误。
+	 	要想解决这个问题，需要给这些可以为null的
+	 	参数明确设置类型，格式是jdbcType=类型(大写)。
+	 	注：一般表中字段太多了，挨个去判断是否可以
+	 		为null麻烦，索性都写上jdbcType算了。
+	  -->
+	<insert id="save"
+		parameterType="com.tarena.entity.Cost">
+		insert into cost values(
+			cost_seq.nextval,
+			#{name,jdbcType=VARCHAR},
+			#{base_duration,jdbcType=INTEGER},
+			#{base_cost,jdbcType=DOUBLE},
+			#{unit_cost,jdbcType=DOUBLE},
+			#{status,jdbcType=CHAR},
+			#{descr,jdbcType=VARCHAR},
+			#{creatime,jdbcType=TIMESTAMP},
+			#{startime,jdbcType=TIMESTAMP},
+			#{cost_type,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<!-- findById -->
+	<!-- 
+		如果传入的参数不是实体类，只是一个基本
+		类型，那么{}中写的字符串可以是任意名称。
+		但为了代码的可读性，一般写成参数名。
+	 -->
+	<select id="findById"
+		parameterType="int"
+		resultType="com.tarena.entity.Cost">
+		select * from cost 
+		where cost_id=#{id}
+	</select>
+	
+	<!-- update -->
+	<update id="update"
+		parameterType="com.tarena.entity.Cost">
+		update cost set
+			name=#{name,jdbcType=VARCHAR},
+			base_duration=#{base_duration,jdbcType=INTEGER},
+			base_cost=#{base_cost,jdbcType=DOUBLE},
+			unit_cost=#{unit_cost,jdbcType=DOUBLE},
+			descr=#{descr,jdbcType=VARCHAR},
+			cost_type=#{cost_type,jdbcType=CHAR}
+		where cost_id=#{cost_id,jdbcType=INTEGER}
+	</update>
+	
+</mapper>

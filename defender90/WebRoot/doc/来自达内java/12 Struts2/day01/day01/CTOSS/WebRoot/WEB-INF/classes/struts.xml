@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+	<!-- 
+		资费模块配置：
+		一般情况下，一个模块配置到一个package下，
+		并且package使用模块名来命名。
+	 -->
+	 <package name="cost"
+	 	namespace="/cost"
+	 	extends="struts-default">
+	 	<!-- 
+	 		查询全部资费.
+	 		method属性可以省略不写，当省略时Struts2
+	 		会自动调用execute方法，当然此时Action类
+	 		中必须有execute方法，否则会报错。
+	 	-->
+	 	<action name="findCost"
+	 		class="com.tarena.action.FindCostAction">
+	 		<result name="success">
+	 			/WEB-INF/cost/cost_list.jsp
+	 		</result>
+	 	</action>
+	 </package>
+
+</struts>

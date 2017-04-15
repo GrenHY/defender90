@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link href='../fullcalendar.min.css' rel='stylesheet' />
+<link href='../fullcalendar.print.min.css' rel='stylesheet' media='print' />
+	<link href='../../jquery-timepicker-addon/jquery-ui-timepicker-addon.css'/>
+<script src='../lib/moment.min.js'></script>
+<script src='../lib/jquery.min.js'></script>
+<script src='../fullcalendar.min.js'></script>
+	<!--<script src='../../jquery-timepicker-addon/jquery-ui-timepicker-addon.js'></script>-->
+	<script src="../../artDialog/dist/dialog.js"></script>
+
+<script>
+
+	$(document).ready(function() {
+
+		// 对Date的扩展，将 Date 转化为指定格式的String
+// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
+// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
+// 例子：
+// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+		Date.prototype.Format = function (fmt) { //author: meizz
+			var o = {
+				"M+": this.getMonth() + 1, //月份
+				"d+": this.getDate(), //日
+				"h+": this.getHours(), //小时
+				"m+": this.getMinutes(), //分
+				"s+": this.getSeconds(), //秒
+				"q+": Math.floor((this.getMonth() + 3) / 3), //季度
+				"S": this.getMilliseconds() //毫秒
+			};
+			if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+			for (var k in o)
+				if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+			return fmt;
+		}
+		var dateNow = new Date().Format("yyyy-MM-dd");
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+			monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+			dayNames: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+			dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+			today: ["今天"],
+			firstDay: 1,
+			buttonText: {
+				today: '今天',
+				month: '月',
+				week: '周',
+				day: '日',
+				prev: '上一月',
+				next: '下一月'
+			},
+			navLinks: true, // can click day/week names to navigate views
+			selectable: true,
+			selectHelper: true,
+			//select: function(start, end) {
+			dayClick: function(date, allDay, jsEvent, view) {
+				var fstart = date._d.Format('yyyy-MM-dd');
+				//	var fstart = $.fullCalendar.formatDate( , "HH:mm");
+			//	var time = $.fullCalendar.formatDate(Math.round(start/1000), "HH:mm");
+			//	var 	time = $.fullCalendar.formatDate(start/1000, "yyyy年mm月ss");
+				var d = dialog({
+					title: '添加任务'+'  '+fstart,
+					content: '<div  id="addTask">'+
+									'<form id="myForm" method="post" action="">'+
+										'<div class="aboxmanageform">'+
+										'<table  style="width:650px">'+
+										'<tr>'+
+										'<td class="item_title">任务名称：'+
+								'</td>'+
+								'<td colspan="3">'+
+									'<input id="title"  name="Name" type="text" style="width:516px"  value="" class="longinput" />'+
+									'</td>'+
+									'</tr>'+
+									'<tr>'+
+									'<td class="item_title">任务内容:'+
+								'</td>'+
+								'<td colspan="3">'+
+									'<textarea cols="80" name="contents" id="contents" rows="10" style="width:516px" class="longinput"></textarea>'+
+									'</td>'+
+									'</tr>'+
+									'<tr>'+
+									'<td class="item_title">开始时间：'+
+								'</td>'+
+								'<td>'+
+									'<input id="start" name="StartDate" type="text" value="" class="longinput" />'+
+									'</td>'+
+								'<td class="item_title">结束时间：'+
+								'</td>'+
+								'<td>'+
+									'<input id="end" name="EndDate" type="text" value="" class="longinput"  />'+
+									'</td>'+
+									'</tr>'+
+									'</table>'+
+									'<input type="hidden" name="ID" value="" />'+
+									'</div>'+
+									'</form>'+
+									'</div>',
+					okValue: '确 定',
+					ok: function() {
+						var title = $('#title').val();
+						var contents = $('#contents').val();
+						var start = $('#start').val();
+						var end = $('#end').val();
+					//	var name = $('#Name').val();
+						var data={title:title, contents:contents,start:start,end:end};
+						$.post(
+								{
+									url:'http://localhost:8080/defender90/servlet/DaySerlvet',
+									data:data,
+									success:function(data) {
+										var jsonobj = 	$.parseJSON(data);
+										$.each(jsonobj, function (index, term) {
+											console.log('item', term);
+											$("#calendar").fullCalendar('renderEvent', term, true);
+										});
+									}
+								}
+						);
+					},
+					cancelValue: '取消',
+					cancel: function() {
+					//	alert('你点了取消按钮')
+					}
+				});
+				d.show();
+			},
+			events:function(view) {
+				$.ajax({
+					url:'http://localhost:8080/defender90/servlet/DaySerlvet?id=1',//get 请求
+					cache:false,
+					success:function(doc) {
+						var jsonobj = 	$.parseJSON(doc);
+						$.each(jsonobj, function (index, term) {
+								 $("#calendar").fullCalendar('renderEvent', term, true);
+						 });
+					}
+				})
+			},
+			editable: true,
+			eventLimit: true, // allow "more" link when too many events
+			eventMouseover: function(event, jsEvent, view){
+			},
+			eventMouseout: function(event, jsEvent, view){
+
+			},
+			eventClick:function(calEvent, jsEvent, view){
+				//对事项进行操作
+
+				var d = dialog({
+					title: '取消任务',
+					content: '君子终日乾乾 夕惕若厉 无咎 ',
+					okValue: '确 定',
+					ok: function() {
+						var title = calEvent.title;
+					//	var contents = $('#contents').val();
+						var start = calEvent.start._i;
+					//	var end = $.fullCalendar.formatDate(calEvent.end , "yyyy-mm-ss HH:mm");
+
+						//	var name = $('#Name').val();
+						var data={title:title,start:start};
+						$.post(
+								{
+									url:'http://localhost:8080/defender90/servlet/DaySerlvet?id=2',
+									data:data,
+									success:function(data) {
+										var jsonobj = 	$.parseJSON(data);
+										$.each(jsonobj, function (index, term) {
+											$("#calendar").fullCalendar('renderEvent', term, true);
+										});
+									}
+								}
+						);
+					},
+					cancelValue: '取消',
+					cancel: function() {
+						//	alert('你点了取消按钮')
+					}
+				});
+				d.show();
+
+
+
+
+
+			}
+			});
+		
+	});
+
+</script>
+<style>
+
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	#calendar {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+</style>
+</head>
+<body>
+
+	<div id='calendar'></div>
+
+	<script type="text/javascript">
+
+//		$(function () {
+//			$("#start").datetimepicker({
+//				hour: 5,
+//				minute: 20
+//			});
+//			$("#end").datetimepicker({
+//				hour: 13,
+//				minute: 15
+//			});
+//		});
+	</script>
+
+
+
+	<script>
+		/**
+		 * 保存数据
+		 * @param event
+         * @constructor
+         */
+		var SaveEditDatas = function (event) {
+			var startdatestr = $("#start").val(); //开始时间
+			var enddatestr = $("#end").val(); //结束时间
+			var name = $("#Name").val();
+			var contents = $("#Contents").val();
+			event.fullname = name;
+			event.start = startdatestr;
+			event.end = enddatestr;
+			var schdata = { name: name, contents: contents, start: startdatestr, end: enddatestr, id: event.id };
+			$.ajax({
+				type: "POST",
+				url: "../DateHandle/UpdateData.ashx",
+				data: schdata, //要发送的数据
+				success: function (data) {
+					$('#calendar').fullCalendar('updateEvent', event);
+				}
+			});
+		}
+	</script>
+
+</body>
+
+</html>

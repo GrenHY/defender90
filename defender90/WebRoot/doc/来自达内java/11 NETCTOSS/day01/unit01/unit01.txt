@@ -1,0 +1,138 @@
+李洪鹤/lihh@tarena.com.cn
+
+一、回顾
+	1、Spring核心功能
+		1）IOC
+			交出业务代码创建、管理对象的控制权，由
+			Spring容器来创建并管理对象，实现对象与
+			业务代码的解耦，便于团队开发。
+		2）AOP
+			针对一批组件进行编程，解决这些组件的通用
+			业务逻辑，使用AOP的好处是可以在不修改这些
+			组件的基础上，灵活的实现通用业务。
+		3）整合
+			Spring是一个管理型框架，可以整合JDBC、
+			MyBatis、Struts2、Hibernate这些技术或
+			框架，以简化他们的使用及实现代码的解耦。
+		4）MVC
+			Spring提供了一套MVC解决方案，可以帮助
+			我们实现MVC。
+	2、Java知识体系
+		画图
+二、项目介绍
+	1、项目背景
+		电信公司有UNIX服务器出租业务，针对这项业务
+		需要有一套软件来支持，以提升电信公司的办公
+		效率，我们接下来所做的项目就是这套软件中的
+		一部分。
+	2、项目介绍
+		1）NETCTOSS（要讲）
+			NetCTOSS是一组单词的缩写，即
+			Net China Telecom Operation Support System
+			中国电信运营支撑系统-网络版
+			a.作用
+				创建客户登陆UNIX服务器的账号，指定客户
+				收费的标准，以及可以查询客户消费情况等。
+			b.使用者
+				电信营业厅的营业员
+			c.部署
+				应用服务器
+		2）DMS（讲过）
+			a.作用
+				用来解析UNIX服务器的日志文件，读取出
+				用户登录登出的时间，从而计算出用户使用
+				服务器的时长，即实现了用户数据的采集功能
+			b.使用者
+				自运行
+			c.部署
+				--DMS Client部署在Unix服务器上
+				--DMS Server部署在应用服务器上
+		3）PL/SQL（不讲）
+			a.作用
+				计算出用户每个月的消费金额
+			b.使用者
+				采用Oracle任务调度机制，在每月月底自动
+				调用。
+			c.部署
+				数据库
+		4）自服务（不讲）
+			a.作用
+				用户使用该系统可以变更套餐，查询历史消费
+				情况等。
+			b.使用者
+				客户
+			c.部署
+				应用服务器
+	3、项目要求
+		1）目标
+			具备独立开发的能力
+		2）要求
+			a.必须自己独立写代码
+			b.自己解决项目中的错误
+			c.至少要完成资费模块、账务账号以及登录
+				相关的功能。
+		3）安排
+			Unit01(Day01-Day02)：
+				资费模块
+			Unit02(Day03-Day04):
+				账务账号
+			Unit03(Day05-Day06)：
+				业务账号
+			Unit04(Day07-Day10)：
+				角色、管理员、登录相关功能
+			Unit05(Day11)：
+				Spring AOP
+			Unit06(Day12):
+				Spring事务管理
+	4、技术架构
+		1）项目环境
+			Linux+MyEclipse6.0+Tomcat6+JDK1.6+mysql5.6
+		2）运用技术
+			Java+MyBatis+Spring+JSP+JQuery
+		3）设计思想
+			采用MVC分层思想，将代码分为如下基层
+			视图层(V)：
+				JSP+JQuery
+			控制层(C)：
+				DispatcherServlet+Controller
+			业务层(C)：
+				Controller
+			持久层(M)：
+				DAO
+				
+四、资费模块
+	1、需求
+		资费模块用于维护客户使用UNIX服务器的收费
+		标准/费用类型。
+	2、查询
+		1）需要几次请求
+			1次请求
+		2）分析请求的过程
+			URL-->
+			DispatcherServlet-->
+			RequestMapping-->
+			CostController.find()-->
+			CostMapper-->Cost-->
+			ViewResolver-->
+			cost_list.jsp
+		3）开发步骤
+			a、DAO
+				--Cost
+				--CostMapper
+				--CostMapper.xml
+			b、Controller
+				--CostController.find()
+			c、JSP
+				--使用JSTL+EL，循环输出资费集合
+	3、新增
+	4、修改
+	5、删除
+	6、分页
+					
+			
+补充：
+	1、如何在页面上格式化日期，同学们先自己尝试解决
+	2、为什么JSP放到WEB-INF下，而样式文件和图片
+		放到WebRoot下。
+	3、为什么cost_list.jsp上引用样式文件，只写一个
+		../，但是该页面与样式文件实际上差了2级。			

@@ -1,0 +1,17 @@
+﻿事务：When
+1件事，包含多条DML
+要成功都成功，要失败都回滚
+How：4步
+try{
+ /*Step1:取消自动提交--开始1个事务*/
+ conn.setAutoCommit(false);
+ （正常流程）
+ /*正常执行最后：必须手动提交*/
+ conn.commit();
+}catch(Exception){
+	/*异常：立即回滚*/
+	conn.rollback();
+}finally{
+	/*归还前：恢复自动提交*/
+	conn.setAutoCommit(true);
+}

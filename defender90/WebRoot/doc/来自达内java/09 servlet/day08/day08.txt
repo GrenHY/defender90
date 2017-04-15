@@ -1,0 +1,80 @@
+Cookie
+	what
+	how
+	添加
+		Cookie c = new Cookie(name,value);
+		URLEncoder.encode..
+		URLDecoder.decode
+		c.setMaxAge(int seconds)
+		c.setPath(String path);
+		response.addCookie(c);
+	查询
+		Cookie[] request.getCookies();
+		cookie.getName
+		cookie.getValue
+	删除
+		Cookie c = new Cookie...
+		c.setMaxAge(0)
+		c.setPath();
+		response.addCookie(c);
+	限制
+		禁止
+		不安全
+		数据量小
+		数量少
+Session
+	what
+	how
+	获得session
+		HttpSession s = 
+				request.getSession(true/false);
+		HttpSession s = 
+				request.getSession();
+	String sessionId = s.getId();
+1,session相关案例
+	(1)session验证
+		step1,登录成功以后，在session对象上
+		绑订相关数据。比如:
+			session.setAttribute("user",user);
+		step2,对于需要保护的资源(只有登录成功才
+		能访问的地址,比如，main.jsp),添加验证代码，
+		比如:
+			Object obj = session.getAttribute("user");
+			if(obj == null){
+				response.sendRedirect("login.jsp");
+			}
+	(2)验证码
+	
+	练习
+			生成一个验证码，要求
+			长度为5个字符，并且这些字符随机从
+			"A~Z,0~9"中选取。
+			比如:   "M092T"
+	练习：
+			给登录页面添加上验证码			
+	
+2,url重写(了解)
+	(1)禁止cookie以后，session
+	机制会失效。
+		因为sessionId默认是以cookie的方式
+	发送给浏览器的，如果禁止cookie,浏览器
+	就不再保存该sessionId了。
+	(2)如何处理?
+		可以使用url重写来解决该问题。
+	(3)url重写是什么?
+		浏览器向服务器上的某个地址发请求时，要在
+		请求地址后面添加上sessionId, 可以通过一些
+		方法来生成包含有sessionId的地址。
+	(4)如何重写?
+		//链接地址，表单提交
+		String response.encodeURL(String url);
+		比如:
+			<form action="<%=response.encodeURL("add.do")%>">
+		//重定向
+		String response.encodeRedirectURL(String url);
+		比如:
+			response.sendRedirect(
+			response.encodeRedirectURL("main.jsp"));
+		
+	
+	

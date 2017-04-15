@@ -1,0 +1,28 @@
+﻿生成6个随机数，按从小到大顺序排列
+var result=[];
+var i=0
+while(i<6){
+    var r=Math.floor(Math.random()*33+1);  
+	//random 0<=r<1
+	//*33    0<=r<32.xxxxx
+	//+1     1<=r<33.xxxxx
+	//floor  1<=r<=33
+    /*判断元素是否在数组中出现
+      indexOf原理和用法同String中*/
+    if(result.indexOf(r)==-1){
+	//result[i]=r;
+    	result.push(r);
+        i++;
+    }
+}
+//正序比较器--笔试
+//function sortFun(a,b){return a-b;}
+//var sortFun=function(a,b){return a-b;}
+//var sortFun=
+    new Function('a','b','return a-b;');
+//
+result.sort(function(a,b){return a-b;});
+
+
+
+

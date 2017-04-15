@@ -1,0 +1,143 @@
+3)添加cookie
+ 	 		Cookie c = new Cookie(String name,String value);
+ 	 		response.addCookie(c);
+4)查询cookie
+			Cookie[] request.getCookies();
+			注：该方法有可能返回null。
+			String cookie.getName();
+			String cookie.getValue();
+5)编码问题
+		cookie只能存放合法的ascii字符，如果要保存中文
+	，需要将中文转换成相应的ascii字符的表示形式。
+		String URLEncoder.encode(String str,String charset);
+		String URLDecoder.decode(String str,String charset);
+		建议，对于要保存的所有数据，都统一编码。
+6)生存时间
+		浏览器在默认情况下，会将cookie保存在
+		内存里面，只有浏览器不关闭，cookie就一直
+		存在。
+		cookie.setMaxAge(int seconds)
+		注意：
+			a,单位是秒。   
+			b,seconds可以
+				>0   浏览器会将cookie保存在硬盘上，
+				当超过指定的时间，cookie失效。
+				<0   缺省值(浏览器将cookie保存在内存)
+				=0  删除cookie
+					比如，要删除一个名称为"uid"的cookie:
+					Cookie c = new Cookie("uid","");
+					c.setMaxage(0);
+					response.addCookie(c);
+		练习：
+				写一个Find_AddCookieServlet,
+			先查询有没有一个名称为"uid"的cookie,
+			如果有，则显示该cookie的值；
+			如果没有，则创建之。
+				不用考虑生存时间和编码问题。
+	7)路径问题
+		a,什么是路径问题
+			浏览器在向服务器上的某个地址发请求时，
+		会比较cookie的地址(或者也可以叫作路径)是
+		否与请求地址匹配，只有匹配的cookie才会被
+		发送。
+		b,cookie默认的路径
+			等于添加该cookie的组件的路径。
+		比如，"/web07/biz01/"  addCookie.jsp添加了
+		一个cookie,则该cookie的路径默认情况下，就等
+		于"/web07/biz01/"
+			/web07/findCookie1.jsp   没有发送
+			/web07/biz01/findCookie2.jsp		 发送
+			/web07/biz01/sub/findCookie3.jsp	发送
+		c,匹配规则
+			要访问的路径必须是cookie的路径或者是其子
+			路径。
+		d,	修改cookie的路径
+			cookie.setPath(String path);
+			比如经常将cookie的路径设置为应用名:
+				cookie.setPath("/web07");
+		思考：
+			如何写一个CookieUtil工具类，实现cookie的
+			添加、删除和查询?
+				addCookie
+				removeCookie
+				findCookie
+	8)cookie的限制
+		a,cookie可以被用户禁止。
+		b,cookie不安全，敏感数据尽量不要保存在
+		浏览器端，如果必须要保存，则必须加密。
+		c,cookie只能保存少量的数据。大约是4k左右。
+		d,浏览器只能保存大约300个左右的cookie。
+		e,cookie只能保存字符串，并且需要编码处理。
+
+2,session(会话)
+	(1)什么是session?
+		服务器端为保存客户端状态而创建的一个对象。
+	(2)session是如何工作的?
+		浏览器访问服务器时，服务器创建一个session
+	对象(该对象有一个id属性，值唯一，一般称之为
+	sessionId),服务器会将sessionId以cookie的方式发
+	送给浏览器。
+		当浏览器再次访问服务器时，会将sessionId发
+	送过来，服务器依据该sessionId就可以找到之前
+	创建的session对象。
+	(3)如何获得一个session对象?
+		1)HttpSession s = 
+			request.getSession(boolean flag);
+			a,当flag = true时
+				先查看请求当中是否有sessionId,如果没有，
+			则创建一个session对象；
+				如果有sessionId,则依据该sessionId查找对应
+			的session对象，找到了就返回该对象，找不到则
+			创建一个新的session对象。
+			b,当flag = false时
+				先查看请求当中是否有sessionId,如果没有，
+				返回null;
+				如果有sessionId,则依据该sessionId查找对应
+			的session对象，找到了就返回该对象，找不到则
+				返回null。
+		2)	HttpSession s = 
+			request.getSession();
+				等价于  request.getSession(true)；
+	(4)绑订数据相关的几个方法					
+			session.setAttribute(String name,Object obj);		
+			Object session.getAttribute(String name);
+			session.removeAttribute(String name);
+	(5)session超时
+			1)什么是session超时
+				服务器会将空闲时间过长的session对象删除掉。
+			2)服务器缺省的超时限制
+				一般是30分钟。
+			3)修改超时限制时长
+				a,修改服务器的配置文件
+				比如，可以修改tomcat的conf/web.xml
+				<session-config>
+        				<session-timeout>30</session-timeout>
+   				 </session-config>
+   				 b,编程的方式
+   				 	session.setMaxInactiveInterval(int seconds);
+   	(6)立即删除session对象
+   				session.invalidate();
+   	练习
+   		登录
+   			step1,建表
+   				create table user(
+   					id int primary key auto_increment,
+   					username varchar(50) unique,
+   					password varchar(30),
+   					name varchar(255),
+   					gender char(1)
+   				);	
+   				insert into user(username,password,name,gender)
+   				values('King','1234','Giving King','m');
+   				注: 
+   					unique: 唯一性约束。
+   	step2,建一个web工程 login
+   	step3,实体类(User类)
+   	step4,DAO(UserDAO)
+   	step5,login.jsp,main.jsp
+   	step6,ActionServlet
+   	
+   		
+   									 	
+								
+			

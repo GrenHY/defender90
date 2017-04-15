@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+	<meta charset="utf-8">
+	<title>书签</title>
+
+	<!--js引入-->
+	
+	<script src="jquery/jquery.min.js"></script>
+    <script src="clock/clock.js"></script>
+    <script src="mousewheel/jquery.mousewheel.js"></script>
+<!--全屏翻一页-->
+  
+    <script src="jquery/jquery-ui.min.js"></script>
+    <script src="fullpage/jquery.fullPage.min.js"></script>
+    
+	<!--js引入-->
+
+	<!--css引入-->
+	<link rel="stylesheet" type="text/css" href="clock/clock.css" media="screen"/>
+   <!--  <link rel="stylesheet" href="fullpage/jquery.fullPage.css"> -->
+
+	<!--css引入-->
+
+	<style>
+	    body,li{ font-family: 'Microsoft Yahei' ;font-size: 16px;margin:0px;padding:0px;}
+         a:link,a:visited{ 
+                       color:blue;
+                    text-decoration:none;  
+                 }
+         a:target{
+             _blank;
+         }
+         #div_first_page{
+            background:transparent url(img/bg_container.jpg) no-repeat top left;
+            background-attachment:fixed;
+
+            height:769px;
+            margin:0px;
+            padding:0px;
+           
+            width:100%; height:100%; z-index:-1;
+            background-size:cover;
+            -moz-background-size:cover;
+            -webkit-background-size:cover;
+         }
+
+         li{
+            list-style-type:none;
+        }
+       /* B).如果你想将列表符换成图像，则： ul li{
+        list-style-type:none;
+        list-style-image: url(images/icon.gif);
+        }*/
+
+	</style>
+    <script type="text/javascript">
+        
+    // $(function() {
+        
+    //     $('body').bind('mousewheel', function(event) {
+    //       event.preventDefault();
+    //       var scrollTop = this.scrollTop;
+    //       this.scrollTop = (scrollTop + ((event.deltaY * event.deltaFactor) * -1));
+    //       console.log(event.deltaY, event.deltaFactor, event.originalEvent.deltaMode, event.originalEvent.wheelDelta);
+    //     });
+    //   });
+ <script>
+
+      $(document).ready(function() {
+        $('#div_web').fullpage({
+             slidesColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', '#f90'],
+            anchors: ['page1', 'page2', 'page3', 'page4']
+        });
+    });
+
+    </script>
+      
+   
+
+
+</head>
+
+<body>
+<!--下一页-->
+<div id="div_content">
+   <div id="div_first_page">
+        <div>
+
+        </div>
+   </div>
+
+<div id="div_second_page">
+        <!--时钟-->
+    <div class="box" id="clock">
+        <!-- 原点 -->
+        <div class="origin"></div>
+        <!-- 时钟数 -->
+        <div class="dot_box">
+            <div class="dot">6</div>
+            <div class="dot">5</div>
+            <div class="dot">4</div>
+            <div class="dot">3</div>
+            <div class="dot">2</div>
+            <div class="dot">1</div>
+            <div class="dot">12</div>
+            <div class="dot">11</div>
+            <div class="dot">10</div>
+            <div class="dot">9</div>
+            <div class="dot">8</div>
+            <div class="dot">7</div>
+        </div>
+        <!-- 时、分、秒针 -->
+        <div class="clock_line hour_line" id="hour_line"></div>
+        <div class="clock_line minute_line" id="minute_line"></div>
+        <div class="clock_line second_line" id="second_line"></div>
+        <!-- 日期 -->
+        <div class="date_info" id="date_info"></div>
+        <!-- 时间 -->
+        <div class="time_info" >
+            <div class="time" id="hour_time"></div>
+            <div class="time" id="minute_time"></div>
+            <div class="time" id="second_time"></div>
+        </div>
+    </div>
+
+    <!--时钟-->
+
+        
+    <div id="div_web">
+
+        <div id="div_common_web" style="float:left">
+            <li>
+                <ul><h3>平常使用</h3></ul>
+                <ul><h4><a href="http://www.dailymail.co.uk/home/index.html">每日邮报</a></h4></ul>
+                <ul><h4><a href="https://www.collinsdictionary.com/">Collins</a></h4></ul>
+                <ul><h4><a href="https://www.jd.com/">京东</a></h4></ul>
+                <ul><h4><a href="http://www.jiemian.com/">界面</a></h4></ul>
+                <ul><h4><a href="http://money.cnn.com/">CNN金融</a></h4></ul>
+                
+                <ul><h4><a href="http://www.open-open.com/">深度开源</a></h4></ul>
+                <ul><h4><a href="http://www.goldmansachs.com/">高盛</a></h4></ul>
+                <ul><h4><a href="https://www.farfetch.com/cn/shopping/women/items.aspx/">Farfetch时尚平台</a></h4></ul>
+                <ul><h4><a href="https://www.douban.com">豆瓣</a></h4></ul>
+            </li>
+        </div>
+
+        <div id="div_office_web" style="float:left">
+            <li>
+                <ul><h3>开发使用</h3></ul>
+                <ul><h4><a href="https://developer.android.google.cn/reference/packages.html">android API</a></h4></ul>
+                <ul><h4><a href="http://www.apache.org">apache官网</a></h4></ul>
+                <ul><h4><a href="http://apache.fayea.com">apache项目下载地址</a></h4></ul>
+                <ul><h4><a href="https://developers.google.cn/">Google为中国开发者</a></h4></ul>
+                <ul><h4><a href="http://weex.help">weex社区</a></h4></ul>
+                <ul><h4><a href="http://www.apjs.net">angular社区</a></h4></ul>
+                <ul><h4><a href="https://github.com/joggerplus/awesome-weex">weex教程</a></h4></ul>
+                <ul><h4><a href="http://www.bootcdn.cn">BootStrap中文网开源项目</a></h4></ul>
+                <ul><h4><a href=" https://apiview.com">接口文档APIVIEW</a></h4></ul>
+             
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+            </li>
+        </div>
+
+        <div id="div_platform-web" style="float:left">
+            <li>
+                <ul><h3>开放平台</h3></ul>
+                <ul><h4><a href="http://open.qq.com/mobi_guide/">腾讯开发者平台</a></h4></ul>
+                <ul><h4><a href="http://open.weibo.com/">新浪微博开发者平台</a></h4></ul>
+                <ul><h4><a href="http://www.kdniao.com/">快递鸟api官网</a></h4></ul>
+                <ul><h4><a href="https://open.weixin.qq.com/">微信开放平台</a></h4></ul>
+                <ul><h4><a href="http://www.mob.com/">sharesdk&nbsp;Mob官网</a></h4></ul>
+                <ul><h4><a href="https://www.qcloud.com/product/XGPush?utm_source=pcsem1&utm_medium=bdgj286&utm_campaign=baidu">信鸽</a></h4></ul>
+        
+                <ul></ul>
+            </li>
+        </div>
+        
+        <div id="div_ge_web" style="float:left">
+            <li>
+                <ul><h3>ge-soft项目</h3></ul>
+                <ul><h4><a href="http://www.gytaobao.cn:9218/GE_MMP">移动配置平台</a></h4></ul>
+                <ul><h4><a href="http://202.107.70.8:8082/glcsgiszc">众筹系统</a></h4></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+            </li>
+        </div>
+
+        <div id="div_ge_tools" style="float:left">
+            <li>
+                <ul><h3>开发工具</h3></ul>
+                <ul><h4><a href="http://www.bejson.com/json2javapojo/">json转实体类</a></h4></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+                <ul></ul>
+            </li>
+        </div>
+
+
+    </div>
+    
+</div>
+</div>
+
+
+</body>
+</html>

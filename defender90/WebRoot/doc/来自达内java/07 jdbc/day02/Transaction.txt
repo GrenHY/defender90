@@ -1,0 +1,19 @@
+﻿事务：When
+1件事，包含多条ＤＭＬ
+要成功都成功，要失败都回滚
+
+转出之前
+try{
+ 第一件事：取消自动提交
+ 转出：
+ update 银行卡 set balance=balance-1000
+ where 借记卡
+ 转入：
+ update 银行卡 set balance=balance+1000
+ where 信用卡
+ 最后：手动提交：commit；
+ "转账成功"
+}catch(Exception){
+	咔--异常了--回滚：rollback;
+	"转账失败"
+}

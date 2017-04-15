@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<script src="js/jquery.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.fullPage.min.js"></script>
+<style>
+body{ margin:0;padding:0;}
+</style>
+</head>
+<body>
+	<div class="fullpage">
+    <div class="section" style="background:#EEE">第一屏</div>
+    <div class="section" style="background:#aaa">第二屏</div>
+    <div class="section"  style="background:#ccc">第三屏</div>
+    <div class="section"  style="background:#666">第四屏</div>
+	</div>
+</body>
+<script>
+    $(document).ready(function() {
+        $('.fullpage').fullpage({
+            slidesColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', '#f90'],
+            anchors: ['page1', 'page2', 'page3', 'page4']
+        });
+    });
+</script>
+</html>
