@@ -1,0 +1,337 @@
+.clear{clear: both;}
+
+.portfolio{
+	position: initial;
+	width: 100%;
+	height: 100vh;
+}
+.portfolio .portfolio-list{
+	width: 245px;
+	margin-left: 230px;
+	margin-top: 0px;
+    height: 420px;
+    overflow: hidden;
+	float: right;
+	opacity: 0;
+	transition-duration: 3s;
+	-webkit-transition-duration: 0.5s;
+	-o-transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+    transition-duration: 0.4s;
+	display: none;
+}
+.portfolio .portfolio-list.active{
+	display: block;
+	opacity: 1;
+    transition-duration: 3s;
+    -webkit-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    transition-duration: 0.4s;
+}
+.portfolio-page .open-port{
+	float: left;
+    margin-left: 70px;
+    transition-duration: 3s;
+    -webkit-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    transition-duration: 0.4s;
+}
+.portfolio .portfolio-list .item{
+	height: 44px;
+	margin-bottom: 12px;
+}
+.portfolio .portfolio-list .item .left{
+	float: left;
+	text-align: left;
+	color: #FFF;
+}
+.portfolio .portfolio-list .item .right{
+	float: right;
+	position: relative;
+}
+.portfolio .portfolio-list .item .right a:active,
+.portfolio .portfolio-list .item .right a:focus,
+.portfolio .portfolio-list .item .right a:hover{
+	text-decoration: none;
+}
+.portfolio .portfolio-list .item .name{
+	font-size: 19px;
+	font-family: 'Circe-Bold';
+	letter-spacing: 0.4px;
+}
+.portfolio .portfolio-list .item .desc{
+	font-size: 14px;
+	font-family: Circe-Regular;
+	margin-top: -3px;
+}
+.portfolio .portfolio-list .item .strelka{
+	width: 66px;
+	height: 55px;
+	line-height: 58px;
+	margin-top: -3px;
+	text-align: center;
+	color: #FFF;
+	font-size: 15px;
+	border-bottom: 1px solid #FFF;
+}
+.portfolio .portfolio-list .item .litle-info{
+	display: none;
+    position: absolute;
+    top: -3px;
+    left: 66px;
+    background-color: rgba(255, 255, 255, 0.80);
+    color: #FFF;
+    padding: 5px;
+    height: 55px;
+    width: 164px;
+    text-align: left;
+    padding-left: 10px;
+}
+.portfolio .portfolio-list .item .litle-info img{
+    max-height: 40px;
+    max-width: 150px;
+}
+.portfolio .full-info{}
+
+.media-p .media-p-list .item .left:hover + .right .strelka,
+.team-p .team-p-list .item .left:hover + .right .strelka,
+.portfolio .portfolio-list .item .left:hover + .right .strelka,
+.portfolio .portfolio-list .item  .strelka:hover{
+	background-color: rgba(255, 255, 255, 0.20);
+}
+.portfolio .portfolio-list .item .strelka:hover ~ .litle-info{
+	display: block;
+}
+.back-port{
+	opacity: 0;
+    display: none;
+    margin-bottom: 23px;
+	text-align: left;
+    transition-duration: 3s;
+    -webkit-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    transition-duration: 0.4s;
+}
+.back-port-show{
+	opacity: 1;
+    margin-bottom: 6px;
+    margin-left: 16px;
+    transition-duration: 3s;
+    -webkit-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    transition-duration: 0.4s;
+}
+.back-port.full-info-close.back-port-show{
+    display: none;
+}
+.portfolio-list.active.open-port{
+    margin-top: -11px;
+}
+.show-left-control{
+    left: 249px;
+    margin-top: -68px !important;
+    width: 610px !important;
+}
+.back-port .hide-detail{
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: left;
+	color: #FFF;
+	text-transform: uppercase;
+	font-size: 26px;
+    padding-top: 150px;
+}
+.show-detail:active{}
+.full-info{
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0.88);
+    right: -1000px;
+    text-align: left;
+    color: #000;
+    padding: 23px;
+    position: absolute;
+    right: -500px;
+    margin-top: -70px;
+    padding-top: 97px;
+    padding-right: 57px;
+    height: 100vh;
+    top: 0px;
+    transition-duration: 3s;
+    -webkit-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    transition-duration: 0.4s;
+}
+.show-detail.active .strelka{
+	background-color: #0F0 !important;
+}
+.full-info-show{
+	opacity: 1;
+	right: 0px;
+    transition-duration: 3s;
+    -webkit-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    transition-duration: 0.4s;
+}
+.portfolio-category{
+	float: left;
+	position: absolute;
+    margin-top: -15px;
+    margin-left: 47px;
+    opacity: 1;
+    transition-duration: 3s;
+    -webkit-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    transition-duration: 0.4s;
+}
+.hide-portfolio-category{
+    left: -340px;
+    opacity: 0;
+    transition-duration: 3s;
+    -webkit-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    transition-duration: 0.4s;
+}
+.portfolio-category a{
+    color: #FFF;
+    font-size: 22px;
+    display: block;
+    width: 234px;
+    line-height: 24px;
+    margin-bottom: 12px;
+    text-align: left;
+    padding: 0px;
+    padding-left: 12px;
+    padding-right: 0px;
+    padding-top: 10px;
+    padding-bottom: 6px;
+    letter-spacing: 0.3px;
+    font-family: Circe-Regular;
+    border: 4px solid rgba(255, 255, 255, 0);
+}
+.portfolio-category a.category-active{
+    cursor: default !important;
+    background: none !important;
+    border-radius: 0 !important;
+    color: #FFF !important;
+    border: 4px solid #FFF;
+    line-height: 26px;
+    font-size: 22px;
+    font-family: 'Circe-Bold';
+    padding-top: 9px !important;
+    padding-bottom: 5px !important;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+}
+.portfolio-list a,
+.portfolio-list a:hover,
+.portfolio-list a:active,
+.portfolio-list a:focus{
+	text-decoration: none;
+}
+.portfolio-page .title{
+	padding-left: 0;
+	margin-left: 0;
+}
+.portfolio-page .block-1-content{
+	padding-left: 0px;
+}
+.portfolio-page .full-info-wrapper {
+    max-width: 570px;
+    margin-left: 22px;
+    margin-top: 29px;
+    font-size: 16px;
+    overflow: hidden;
+}
+.portfolio .left.show-detail:hover{
+    cursor: pointer;
+}
+.scroll-list-control.scteam{
+    display: none;
+}
+.scteam-show{
+    display: block !important;
+    right: 14px;
+}
+/*-------media------*/
+@media screen and (min-width: 1180px) {
+    .portfolio-category a{
+        width: 340px;
+        line-height: 42px !important;
+        font-size: 32px !important;
+        border: 4px solid rgba(255, 255, 255, 0);
+        letter-spacing: 0.6px;
+        word-wrap: break-word !important;
+    }
+    .portfolio .portfolio-list .item .name{
+        font-size: 19px;
+    }
+    .portfolio .portfolio-list .item .desc{
+        font-size: 16px;
+        padding-left: 1px;
+    }
+    .portfolio .portfolio-list .item {
+        height: 55px;
+        margin-bottom: 16px;
+    }
+    .team-full-info-wrapper{
+        max-width: 800px !important;
+        margin-left: 22px !important;
+        margin-top: 29px !important;
+        /* font-size: 21px !important; */
+        font-size: 17px;
+        overflow: hidden !important;
+    }
+    .media-full-info-wrapper{
+        max-width: 800px !important;
+        margin-left: 22px !important;
+        margin-top: 29px !important;
+        /* font-size: 21px !important; */
+        font-size: 17px;
+        overflow: hidden !important;
+    }
+    .media-full-title{
+        font-size: 23px;
+    }
+    .media-full-info-wrapper .date{
+        font-size: 19px;
+        font-family: 'Circe-Bold';
+    }
+    .portfolio-page .full-info-wrapper {
+        max-width: 800px !important;
+        margin-left: 22px !important;
+        margin-top: 29px !important;
+        /* font-size: 21px !important; */
+        font-size: 17px;
+        overflow: hidden !important;
+    }
+    .full-info-wrapper strong:first-child {
+        font-size: 21px !important;
+        line-height: 35px !important;
+    }
+}
+@media screen and (min-width: 1400px) {
+    .portfolio-category a{
+        font-size: 36px;
+        width: 326px;
+        line-height: 46px;
+        letter-spacing: 0.6px;
+    }
+    .portfolio .portfolio-list .item .name{
+        font-size: 29px;
+    }
+    .portfolio .portfolio-list .item {
+        height: 52px;
+    }
+    .block-2-content ul{
+        margin-top: 29px;
+    }
+}
