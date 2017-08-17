@@ -1,8 +1,0 @@
-﻿每页r行，取第n页
-select * from
- (select (@rownum:=@rownum+1) as rn,
-	id,name,salary
-  from emp_zhangdong
-     ,(select (@rownum:=0)) rn
- order by salary desc) a
-limit r*(n-1),r
